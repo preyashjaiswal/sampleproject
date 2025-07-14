@@ -51,6 +51,10 @@ jobs:
       uses: azure/setup-helm@v4
       with:
         version: v3.13.0
+    - name: Set up kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > kubeconfig
+        export KUBECONFIG=$PWD/kubeconfig
 
     - name: Deploy backend
       run: |
